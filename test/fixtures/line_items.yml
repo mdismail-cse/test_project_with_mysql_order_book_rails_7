@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uint_price: 1
+  quantity: 1
+  total_price: 1
+  product: one
+  purchase_order: one
+
+two:
+  uint_price: 1
+  quantity: 1
+  total_price: 1
+  product: two
+  purchase_order: two

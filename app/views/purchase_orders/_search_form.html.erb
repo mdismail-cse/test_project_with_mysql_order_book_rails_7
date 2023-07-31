@@ -1,0 +1,7 @@
+<%= search_form_for @q, method: :get do |f| %>
+    <%= f.label :title_i_cont_any, "Price" %>
+    <%= f.text_field :total_price_i_cont_any %>
+
+
+    <%= f.submit "Search" %>
+  <% end %>

@@ -1,0 +1,8 @@
+  <%= search_form_for @q, method: :get do |f| %>
+    <%= f.label :name_cont, "Supplier Name" %>
+    <%= f.text_field :name_cont %>
+
+
+
+    <%= f.submit "Search" %>
+  <% end %>

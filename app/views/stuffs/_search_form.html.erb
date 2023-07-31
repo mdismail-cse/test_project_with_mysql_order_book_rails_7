@@ -1,0 +1,10 @@
+  <%= search_form_for @q, method: :get do |f| %>
+    <%= f.label :email_cont, "Stuff Email" %>
+    <%= f.text_field :email_cont %>
+
+    <%= f.label :role_id_eq, "Stuff Role" %>
+    <%= f.collection_select :role_id_eq, Role.all, :id, :position, prompt: true %>
+
+    <%= f.submit "Search" %>
+
+  <% end %>

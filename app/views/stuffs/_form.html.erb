@@ -1,0 +1,39 @@
+<%= form_with(model: stuff, class: "contents") do |form| %>
+  <% if stuff.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(stuff.errors.count, "error") %> prohibited this stuff from being saved:</h2>
+
+      <ul>
+        <% stuff.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :password %>
+    <%= form.text_field :password, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+    <div class="my-5">
+    <%= form.label :role_id %>
+    <%= form.select :role_id, options_for_select({ "Admin" => 1, "Moderator" => 2, "Stuff" => 3 }), {}, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :profile_image %>
+    <%= form.file_field :profile_image%>
+  </div>
+
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+  
+<% end %>

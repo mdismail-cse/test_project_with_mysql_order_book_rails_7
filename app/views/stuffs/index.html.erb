@@ -1,0 +1,61 @@
+<!-- app/views/stuffs/index.html.erb -->
+
+<div class="w-full">
+
+ <% if notice.present? %>
+    <p class="ml-20 py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %> 
+
+
+    <%= button_to "Download as CSV", stuffs_path(format: :csv), method: :get, class: "text-4xl ml-20 py-2 px-4 bg-blue-600 text-white font-bold rounded-lg" %>
+  <br>
+
+    <%= form_with url: import_stuffs_path, class: "text-2xl ml-20", method: :post do |form| %>
+
+      <div style="display: flex; align-items: center;">
+        <%= form.file_field :file,  style: "margin-right: 10px;" %>
+        <%= form.button "Import CSV", class: "btn-primary", style: "padding: 10px 20px; background-color: blue; color: white; border: none; cursor: pointer; border-radius: 5px;" %>
+      </div>
+
+    <% end %>
+  
+  <div class="flex justify-between items-center">
+
+   <h1 class="font-bold text-4xl ml-20">Staffs</h1>
+    <%= link_to 'New stuff', new_stuff_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <%= render 'shared/sidebar'%>
+  <div class="overflow-x-auto ml-20">
+  <%= render 'stuffs/search_form'%>
+    <table class="table-auto w-full mt-5">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">Email</th>
+          <%
+=begin%>
+ <th class="px-4 py-2">Password</th> 
+<%
+=end%>
+          <th class="px-4 py-2">Position</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @stuffs %>
+
+      </tbody>
+    </table>
+  
+  
+  
+  </div>
+<br>
+  <div class="overflow-x-auto ml-20">
+      <%= paginate @stuffs %>
+  </div>
+
+<br>
+
+
+</div>

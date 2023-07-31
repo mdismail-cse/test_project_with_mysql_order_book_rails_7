@@ -1,0 +1,26 @@
+  
+  
+  <%= search_form_for @q, method: :get do |f| %>
+    <%= f.label :title_i_cont_any, "Product Title" %>
+    <%= f.text_field :title_i_cont_any %>
+
+    <%= f.label :description_cont, "Product Description" %>
+    <%= f.text_field :description_cont %>
+
+    <%
+=begin%>
+ <%= f.label :created_at_gteq, "Product Created After" %>
+    <%= f.date_select :created_at_gteq %> 
+<%
+=end%>
+
+<%= f.label :created_at_gteq, "Product Created After" %>
+<%= f.date_select :created_at_gteq, { default: nil }, { include_blank: true } %>
+
+
+
+
+    <br>
+    <br>
+    <%= f.submit "Search" %>
+  <% end %>

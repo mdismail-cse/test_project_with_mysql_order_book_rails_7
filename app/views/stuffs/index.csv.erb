@@ -1,0 +1,9 @@
+<%= fields =[:id , :email].join(";") %>
+<% stuffs = Stuff.all%>
+
+<% stuffs.each do |stuff| %>
+<% id = stuff.id %>
+<% email = stuff.email %>
+
+<%=[id.to_s , email].join(";")%>
+<%end%>

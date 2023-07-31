@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProjectWithMysql</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+         <%
+=begin%>
+ <p class="notice"><%= notice %></p>
+         <p class="alert"><%= alert %></p> 
+<%
+=end%>
+
+  <%= render 'shared/nav' %>
+    <main class="container mx-auto mt-28 px-5 flex">
+      
+      <%= yield %>
+    </main>
+
+    <%
+=begin%>
+ <script src="../path/to/flowbite/dist/flowbite.min.js"></script> 
+<%
+=end%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
+  </body>
+
+  <footer>
+
+  <br>
+  <br>
+  <br>
+      <%= render 'shared/footer'%>
+  </footer>
+</html>
