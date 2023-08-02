@@ -3,6 +3,9 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
+  <div class= "ml-20">
+  <%= render 'search_form' %>
+  </div>
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl ml-20">Purchase orders</h1>
     <%= link_to 'New purchase order', ps_price_index_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
@@ -23,7 +26,10 @@
     </thead>
     <tbody>
         <%= render @purchase_orders %>
-      </tbody>
+        <%#= render :partial => "purchase_orders/purchase_order", :object => @purchase_orders %>
+        <%#= render 'purchase_orders/po_items', :po_items => purchase_order.line_items , :purchase_order => purchase_order %>
+
+    </tbody>
     </table>
   </div>
 </div>

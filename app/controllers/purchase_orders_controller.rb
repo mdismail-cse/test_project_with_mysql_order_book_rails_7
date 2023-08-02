@@ -3,11 +3,27 @@ class PurchaseOrdersController < ApplicationController
 
   # GET /purchase_orders or /purchase_orders.json
   def index
-    @purchase_orders = PurchaseOrder.all
-    
+    # @purchase_orders = PurchaseOrder.all
+
     @profile = current_stuff
 
+    purchase_orders = PurchaseOrder.all
 
+    # debugger
+
+    if params[:products_name].present?
+      product_ids = Product.where('title LIKE ?', "%#{params[:products_name]}%").pluck(:id)
+      purchase_orders = purchase_orders.where(id: LineItem.where(product_id: product_ids).pluck(:purchase_order_id))
+    end
+
+    if params[:stuff_email].present?
+      stuff_ids = Stuff.where('email LIKE ?', "%#{params[:stuff_email]}%").pluck(:id)
+      purchase_orders = purchase_orders.where(stuff_id: stuff_ids)
+    end
+
+    purchase_orders = purchase_orders.where(total_price: params[:total_price]) if params[:total_price].present?
+
+    @purchase_orders = purchase_orders.page(params[:page]).per(10)
   end
 
   # GET /purchase_orders/1 or /purchase_orders/1.json

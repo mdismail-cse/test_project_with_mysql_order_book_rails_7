@@ -1,7 +1,59 @@
-<%= search_form_for @q, method: :get do |f| %>
-    <%= f.label :title_i_cont_any, "Price" %>
-    <%= f.text_field :total_price_i_cont_any %>
+<%#= form_tag purchase_orders_url, method: :get do %>
+  <%#= text_field_tag 'total_price', nil, placeholder: ' ' %>
+  <%#= submit_tag "Submit", class: "mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded cursor-pointer" %>
 
 
-    <%= f.submit "Search" %>
-  <% end %>
+
+
+<%# end %>
+
+
+
+<%= form_tag purchase_orders_url, method: :get do %>
+  <%= label_tag :products_name, "Search Products Name" %>
+  <%= text_field_tag :products_name, params[:products_namee], placeholder: ' ' %>
+
+
+  <%= label_tag :stuff_email, "Search Stuff Email" %>
+  <%= text_field_tag :stuff_email, params[:stuff_email], placeholder: ' ' %>
+
+
+  <%= label_tag :total_price, "Search Total Price" %>
+  <%= text_field_tag :total_price, params[:total_price], placeholder: ' ' %>
+
+
+  <%= submit_tag "Search", class: "mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded cursor-pointer" %>
+<% end %>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- index.html.erb -->
+<%#= search_form_for @q do |f| %>
+  <%#= f.label :products_list_cont_any, "Search Products List" %>
+  <%#= f.text_field :products_list_i_cont_any %>
+<!--  <br>-->
+
+  <%#= f.label :total_price_i_cont_any, "Search Total Price" %>
+  <%#= f.text_field :total_price_i_cont_any %>
+<!--  <br>-->
+
+  <%#= f.label :stuff_email_cont_any, "Search Stuff Email" %>
+  <%#= f.text_field :stuff_email_cont_any %>
+<!--  <br>-->
+
+  <%#= f.submit "Search" %>
+<%# end %>

@@ -20,8 +20,14 @@ class PsPriceController < ApplicationController
       po_total_price += line_item.total_price
     end
     po.total_price = po_total_price
-    po.save!
-    redirect_to po
+
+    if po_total_price != 0
+        po.save!
+        redirect_to po
+    else
+      redirect_to ps_price_create_path
+    end
+
   end
 
   def create_order
