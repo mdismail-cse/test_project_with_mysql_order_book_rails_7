@@ -3,9 +3,10 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true).page(params[:page]).per(10)
-        
+    products = Product.all
+    products = products.where(title: params[:title]) if params[:title].present?
+    @products = products.page(params[:page]).per(10)
+
     @profile = current_stuff
   end
 

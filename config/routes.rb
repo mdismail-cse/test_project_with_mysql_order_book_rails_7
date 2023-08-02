@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  get 'ps_price/index'
+  post 'ps_price/create'
+  get 'ps_price/details'
+  get 'ps_price/create_order', to: 'ps_price#create_order'
   resources :roles
   devise_for :stuffs
   resources :purchase_orders
   resources :products
   resources :suppliers
+
+  # resources :ps_price
   get '/search', to: 'products#search', as: 'search'
   
   

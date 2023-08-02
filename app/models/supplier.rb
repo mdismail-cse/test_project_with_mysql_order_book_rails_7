@@ -1,6 +1,8 @@
 class Supplier < ApplicationRecord
     paginates_per 20
 
+    has_many :line_items
+
     has_many :product_suppliers
     has_many :products , through: :product_suppliers
 

@@ -1,0 +1,58 @@
+<table class="table-auto w-full table-fixed ml-10 ">
+  <thead>
+  <tr>
+    <th class="px-4 py-2">Product Name</th>
+    <th class="px-4 py-2">Price</th>
+    <th class="px-4 py-2">Stuff Email</th>
+<!--    <th class="px-4 py-2">Details</th>-->
+    <!--    <th class="px-4 py-2">Supplier Name</th>-->
+
+  </tr>
+  </thead>
+  <tbody>
+  <% products_list = [] %>
+  <%po_items = @purchase_order.line_items %>
+  <% po_items.each do |line_item| %>
+    <% products_list << line_item.product.title %>
+  <% end %>
+
+
+
+  <%po_items = @purchase_order.line_items %>
+  <% po_items.each do |line_item| %>
+
+
+
+
+
+  <%# po_items.each do |line_item| %>
+
+
+
+  <tr>
+    <td class="border px-4 py-2"><%= line_item.product.title  %></td>
+    <td class="border px-4 py-2"><%= line_item.uint_price  %></td>
+
+    <% stuff_name = Stuff.find_by_id(@purchase_order.stuff_id) %>
+    <% if stuff_name %>
+      <td class="border px-4 py-2"><%= stuff_name.email %></td>
+    <% else %>
+      <td class="border px-4 py-2">stuff is not found</td>
+    <% end %>
+    <!--      <td class="border px-4 py-2"><%#= link_to 'details', purchase_order , purchase_order => PurchaseOrder.find(purchase_order.id)%></td>-->
+
+<!--    <td class="border px-4 py-2"><%#= link_to 'details', ps_price_details_path(@purchase_order)%></td>-->
+
+    <!--      <td class="border px-4 py-2"><%#= link_to 'details', ps_price_details_path , purchase_order => PurchaseOrder.find(purchase_order.id), :purchase_order => purchase_order %></td>-->
+    <%# supplier = Supplier.find_by_id(line_item.supplier_id) %>
+    <%# if supplier %>
+    <!--        <td class="border px-4 py-2"><%#= supplier.name %></td>-->
+    <%# else %>
+    <!--        <td class="border px-4 py-2">Supplier not found</td>-->
+    <%# end %>
+
+    <%# end %>
+
+    <% end %>
+  </tbody>
+</table>

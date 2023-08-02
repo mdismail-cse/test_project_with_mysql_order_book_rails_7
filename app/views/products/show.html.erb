@@ -13,3 +13,37 @@
     <%= link_to 'Back to products', products_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
+
+  <%
+=begin%>
+ <p></p>
+  <br>
+  <div>
+      <% pro = @product %>
+      <% sup = pro.suppliers %>
+
+<h1>List of suppliers:</h1>
+<% sup.each do |x| %>
+  <% pr = ProductSupplier.find(x.id) %>
+  
+  <br>
+  <ul>
+    <li><%= x.id %></li>
+    <li><%= x.name %></li>
+    <li><%= pr.price %></li>
+   
+    <%= form_with(model: LineItem, url: line_item_create_path, method: :post) do |form| %>
+      <%= form.hidden_field :product_id, value: pro.id %>
+      <%= form.hidden_field :supplier_id, value: x.id %>
+      <%= form.hidden_field :unit_price, value: pr.price %>
+      <input type="number" name="line_item[quantity]" />
+      <%= form.submit "Order Here", style: "background-color: #f56565; color: #fff; padding: 0.5rem 1rem; border-radius: 0.375rem; cursor: pointer;" %>
+    <% end %>
+  </ul>
+<% end %>
+
+
+
+  </div> 
+<%
+=end%>

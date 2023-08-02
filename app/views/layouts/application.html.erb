@@ -13,24 +13,20 @@
   </head>
 
   <body>
-         <%
-=begin%>
- <p class="notice"><%= notice %></p>
-         <p class="alert"><%= alert %></p> 
-<%
-=end%>
+
+<!-- <p class="notice"><%#= notice %></p>-->
+<!--         <p class="alert"><%#= alert %></p> -->
+
 
   <%= render 'shared/nav' %>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container mx-auto mt-28 px-5 ">
       
       <%= yield %>
     </main>
 
-    <%
-=begin%>
- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> 
-<%
-=end%>
+
+<!-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
   </body>
 

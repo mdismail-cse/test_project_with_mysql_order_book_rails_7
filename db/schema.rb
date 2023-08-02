@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_30_063407) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_071136) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,8 +47,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_063407) do
     t.bigint "purchase_order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "supplier_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
     t.index ["purchase_order_id"], name: "index_line_items_on_purchase_order_id"
+    t.index ["supplier_id"], name: "index_line_items_on_supplier_id"
   end
 
   create_table "product_suppliers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -72,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_063407) do
     t.integer "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "stuff_id"
   end
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -105,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_063407) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "line_items", "products"
   add_foreign_key "line_items", "purchase_orders"
+  add_foreign_key "line_items", "suppliers"
   add_foreign_key "product_suppliers", "products"
   add_foreign_key "product_suppliers", "suppliers"
   add_foreign_key "stuffs", "roles"
