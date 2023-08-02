@@ -11,17 +11,18 @@ class PurchaseOrdersController < ApplicationController
 
     # debugger
 
-    if params[:products_name].present?
-      product_ids = Product.where('title LIKE ?', "%#{params[:products_name]}%").pluck(:id)
-      purchase_orders = purchase_orders.where(id: LineItem.where(product_id: product_ids).pluck(:purchase_order_id))
-    end
+    if params[:search].present?
+      search_term = "%#{params[:search]}%"
+      product_ids = Product.where('title LIKE ?', search_term).pluck(:id)
+      stuff_ids = Stuff.where('email LIKE ?', search_term).pluck(:id)
 
-    if params[:stuff_email].present?
-      stuff_ids = Stuff.where('email LIKE ?', "%#{params[:stuff_email]}%").pluck(:id)
-      purchase_orders = purchase_orders.where(stuff_id: stuff_ids)
+      purchase_orders = purchase_orders.where(
+        'id IN (:line_item_purchase_order_ids) OR stuff_id IN (:stuff_ids) OR total_price = :total_price',
+        line_item_purchase_order_ids: LineItem.where(product_id: product_ids).pluck(:purchase_order_id),
+        stuff_ids: stuff_ids,
+        total_price: params[:search].to_i
+      )
     end
-
-    purchase_orders = purchase_orders.where(total_price: params[:total_price]) if params[:total_price].present?
 
     @purchase_orders = purchase_orders.page(params[:page]).per(10)
   end

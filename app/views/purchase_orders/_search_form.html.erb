@@ -9,21 +9,32 @@
 
 
 
+<%#= form_tag purchase_orders_url, method: :get do %>
+  <%#= label_tag :products_name, "Search Products Name" %>
+  <%#= text_field_tag :products_name, params[:products_name], placeholder: ' ' %>
+
+
+  <%#= label_tag :stuff_email, "Search Stuff Email" %>
+  <%#= text_field_tag :stuff_email, params[:stuff_email], placeholder: ' ' %>
+
+
+  <%#= label_tag :total_price, "Search Total Price" %>
+  <%#= text_field_tag :total_price, params[:total_price], placeholder: ' ' %>
+
+
+  <%#= submit_tag "Search", class: "mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded cursor-pointer" %>
+<%# end %>
+
+
 <%= form_tag purchase_orders_url, method: :get do %>
-  <%= label_tag :products_name, "Search Products Name" %>
-  <%= text_field_tag :products_name, params[:products_namee], placeholder: ' ' %>
-
-
-  <%= label_tag :stuff_email, "Search Stuff Email" %>
-  <%= text_field_tag :stuff_email, params[:stuff_email], placeholder: ' ' %>
-
-
-  <%= label_tag :total_price, "Search Total Price" %>
-  <%= text_field_tag :total_price, params[:total_price], placeholder: ' ' %>
-
-
+  <b><%= label_tag :search, "Search here" %></b>
+  <%= text_field_tag :search, params[:search], placeholder: 'Enter search terms' %>
   <%= submit_tag "Search", class: "mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded cursor-pointer" %>
 <% end %>
+
+
+
+
 <br>
 
 
