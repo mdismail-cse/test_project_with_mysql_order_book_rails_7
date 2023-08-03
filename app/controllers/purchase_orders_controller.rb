@@ -13,7 +13,7 @@ class PurchaseOrdersController < ApplicationController
 
     if params[:search].present?
       search_term = "%#{params[:search]}%"
-      product_ids = Product.where('title LIKE ?', search_term).pluck(:id)
+          product_ids = Product.where('title LIKE ?', search_term).pluck(:id)
       stuff_ids = Stuff.where('email LIKE ?', search_term).pluck(:id)
 
       purchase_orders = purchase_orders.where(
