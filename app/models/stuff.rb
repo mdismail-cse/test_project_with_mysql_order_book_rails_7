@@ -9,6 +9,7 @@ class Stuff < ApplicationRecord
   :recoverable, :rememberable, :validatable
 #  validates :role_id, presence: true
   belongs_to :role
+  belongs_to :position
 
 
 

@@ -126,7 +126,7 @@ class StuffsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stuff_params
-      params.require(:stuff).permit(:email, :password, :role_id,:current_password, :profile_image)
+      params.require(:stuff).permit(:email, :password, :role_id,:current_password, :profile_image, :name, :address, :blood_group, :position, :department, :position_id)
     end
 end
 

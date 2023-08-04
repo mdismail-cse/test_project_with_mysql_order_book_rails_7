@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  # get 'departments/index'
+  # get 'departments/show'
+  # get 'departments/new'
+  # get 'departments/edit'
+  # get 'departments/create'
+  # get 'departments/update'
+  # get 'departments/destroy'
+  resources :departments
+  resources :positions
+
+
   get 'ps_price/index'
   post 'ps_price/create'
   get 'ps_price/details'

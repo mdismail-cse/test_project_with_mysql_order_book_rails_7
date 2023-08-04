@@ -1,0 +1,16 @@
+<div class="mb-4">
+  <strong class="block font-semibold">Post Name:</strong>
+  <%= @position.post_name %>
+</div>
+<div class="mb-4">
+  <strong class="block font-semibold">Description:</strong>
+  <%= @position.description %>
+</div>
+<div class="mb-4">
+  <strong class="block font-semibold">Department:</strong>
+  <%= @position.department.title %>
+</div>
+<div>
+  <%= link_to 'Edit', edit_position_path(@position), class: 'px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700' %> |
+  <%= link_to 'Back', positions_path, class: 'px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700' %>
+</div>

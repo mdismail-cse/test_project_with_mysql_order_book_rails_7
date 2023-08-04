@@ -27,6 +27,26 @@
   </div>
 
   <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :address %>
+    <%= form.text_field :address, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :blood_group %>
+    <%= form.text_field :blood_group, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :position_id, class: 'block font-semibold' %>
+    <%= form.select :position_id, Position.all.map { |pos| [pos.post_name, pos.id] }, {}, class: 'w-full p-2 border border-gray-300 rounded' %>
+  </div>
+
+  <div class="my-5">
     <%= form.label :profile_image %>
     <%= form.file_field :profile_image%>
   </div>
