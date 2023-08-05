@@ -1,5 +1,6 @@
 class PositionsController < ApplicationController
 
+  before_action :unique_post_name_within_department, only: [:create]
   def index
     # @positions = Position.all
     if params[:search].present?
@@ -55,5 +56,13 @@ class PositionsController < ApplicationController
 
   def position_params
     params.require(:position).permit(:post_name, :department_id, :description, :search)
+  end
+
+  def unique_post_name_within_department
+    if Position.where(post_name: position_params[:post_name], department_id: position_params[:department_id]).exists?
+      @position = Position.new(position_params)
+      @position.errors.add(:post_name, 'already exists for this department')
+      render :new
+    end
   end
 end
