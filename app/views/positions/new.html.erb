@@ -1,9 +1,16 @@
-<% if notice.present? %>
-  <p class="ml-20 py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<% if @position.errors.any? %>
+  <h2>
+    <%= pluralize(@position.errors.count, "error") %> prohibited this contact from being saved:
+  </h2>
+
+  <ul>
+    <% @position.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
 <% end %>
-
-
 
 <h1 class="text-2xl font-bold mb-4">New Position</h1>
 <%= render 'form', position: @position %>
+<br>
 <%= link_to 'Back', positions_path, class: 'px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700' %>

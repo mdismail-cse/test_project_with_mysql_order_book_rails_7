@@ -72,17 +72,30 @@ class StuffsController < ApplicationController
   def create
     @stuff = Stuff.new(stuff_params)
 
-    
+    # bd_pattern = /^(\+8801|8801|01|008801)[1|3-9]{1}\d{8}$/
+    # # bd_country_code = /\+88/
+    # if stuff_params[:phone_number].match(bd_pattern)
+      # # debugger
+      # if stuff_params[:phone_number].match(bd_country_code)
+      #   remove_code ='+88'
+      #   stuff_params[:phone_number].sub!(remove_code,'')
+      #
+      #   # debugger
+      # end
+            respond_to do |format|
+              if @stuff.save
+                format.html { redirect_to stuff_url(@stuff), notice: "Stuff was successfully created." }
+                format.json { render :show, status: :created, location: @stuff }
+              else
+                format.html { render :new, status: :unprocessable_entity }
+                format.json { render json: @stuff.errors, status: :unprocessable_entity }
+              end
+            end
+    #
+    # else
+    #       render :new
+    # end
 
-    respond_to do |format|
-      if @stuff.save
-        format.html { redirect_to stuff_url(@stuff), notice: "Stuff was successfully created." }
-        format.json { render :show, status: :created, location: @stuff }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @stuff.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /stuffs/1 or /stuffs/1.json
@@ -126,7 +139,7 @@ class StuffsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stuff_params
-      params.require(:stuff).permit(:email, :password, :role_id,:current_password, :profile_image, :name, :address, :blood_group, :position, :department, :position_id)
+      params.require(:stuff).permit(:email, :password, :role_id,:current_password, :profile_image, :name, :address, :blood_group, :position, :department, :position_id, :phone_number)
     end
 end
 

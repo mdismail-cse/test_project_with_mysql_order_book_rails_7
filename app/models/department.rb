@@ -1,7 +1,7 @@
 class Department < ApplicationRecord
 
-  # validates :title, uniqueness: true
-  # validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
+
 
   has_many :positions
 
