@@ -13,7 +13,7 @@ class PurchaseOrdersController < ApplicationController
 
     if params[:search].present?
       search_term = "%#{params[:search]}%"
-          product_ids = Product.where('title LIKE ?', search_term).pluck(:id)
+      product_ids = Product.where('title LIKE ?', search_term).pluck(:id)
       stuff_ids = Stuff.where('email LIKE ?', search_term).pluck(:id)
 
       purchase_orders = purchase_orders.where(
@@ -46,7 +46,7 @@ class PurchaseOrdersController < ApplicationController
 
     respond_to do |format|
       if @purchase_order.save
-        format.html { redirect_to purchase_order_url(@purchase_order), notice: "Purchase order was successfully created." }
+        format.html { redirect_to purchase_order_url(@purchase_order), notice: 'Purchase order was successfully created.' }
         format.json { render :show, status: :created, location: @purchase_order }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,7 +59,7 @@ class PurchaseOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @purchase_order.update(purchase_order_params)
-        format.html { redirect_to purchase_order_url(@purchase_order), notice: "Purchase order was successfully updated." }
+        format.html { redirect_to purchase_order_url(@purchase_order), notice: 'Purchase order was successfully updated.' }
         format.json { render :show, status: :ok, location: @purchase_order }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -73,7 +73,7 @@ class PurchaseOrdersController < ApplicationController
     @purchase_order.destroy
 
     respond_to do |format|
-      format.html { redirect_to purchase_orders_url, notice: "Purchase order was successfully destroyed." }
+      format.html { redirect_to purchase_orders_url, notice: 'Purchase order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -81,7 +81,7 @@ class PurchaseOrdersController < ApplicationController
   def search
     @q = params[:q]
     # Add your logic to perform the search based on the @q parameter
-    @purchase_order = PurchaseOrder.where("name LIKE ?", "%#{@q}%")
+    @purchase_order = PurchaseOrder.where('name LIKE ?', "%#{@q}%")
   end
 
 
@@ -90,12 +90,12 @@ class PurchaseOrdersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_purchase_order
-      @purchase_order = PurchaseOrder.find(params[:id])
-    end
+  def set_purchase_order
+    @purchase_order = PurchaseOrder.find(params[:id])
+  end
 
     # Only allow a list of trusted parameters through.
-    def purchase_order_params
-      params.require(:purchase_order).permit(:total_price)
-    end
+  def purchase_order_params
+    params.require(:purchase_order).permit(:total_price)
+  end
 end

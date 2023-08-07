@@ -1,0 +1,32 @@
+<div id="<%= dom_id asset_stuff %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Status:</strong>
+    <%= asset_stuff.status %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Assign at:</strong>
+    <%= asset_stuff.assign_at %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Return at:</strong>
+    <%= asset_stuff.return_at %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Company asset:</strong>
+    <%= asset_stuff.company_asset_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Stuff:</strong>
+    <%= asset_stuff.stuff_id %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this asset stuff", asset_stuff, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this asset stuff', edit_asset_stuff_path(asset_stuff), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

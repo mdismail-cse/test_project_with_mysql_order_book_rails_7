@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 1
+  assign_at: 2023-08-07 15:58:02
+  return_at: 2023-08-07 15:58:02
+  company_asset: one
+  stuff: one
+
+two:
+  status: 1
+  assign_at: 2023-08-07 15:58:02
+  return_at: 2023-08-07 15:58:02
+  company_asset: two
+  stuff: two

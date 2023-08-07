@@ -1,0 +1,46 @@
+<%= form_with(model: asset_stuff, class: "contents") do |form| %>
+  <% if asset_stuff.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(asset_stuff.errors.count, "error") %> prohibited this asset_stuff from being saved:</h2>
+
+      <ul>
+        <% asset_stuff.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :status %>
+    <%# Display non-editable status field for "assign" status %>
+    <%= form.hidden_field :status, value: :assigned %>
+    <%= text_field_tag :status_display, asset_stuff.status, disabled: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full bg-gray-100" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :assign_at %>
+    <%= form.datetime_field :assign_at, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+<!--  <div class="my-5">-->
+    <%#= form.label :return_at %>
+    <%#= form.datetime_field :return_at, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<!--  </div>-->
+
+  <div class="my-5">
+    <%= form.label :company_asset_id %>
+    <%= form.text_field :company_asset_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+
+  <div class="my-5">
+    <%= form.label :stuff_id %>
+    <%# Display non-editable stuff_id field %>
+    <%= form.hidden_field :stuff_id, value: @stuff.id %>
+    <%= text_field_tag :stuff_id_display, @stuff.id, disabled: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full bg-gray-100" %>
+  </div>
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

@@ -1,0 +1,44 @@
+<%= form_with(model: company_asset, class: "contents") do |form| %>
+  <% if company_asset.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(company_asset.errors.count, "error") %> prohibited this company_asset from being saved:</h2>
+
+      <ul>
+        <% company_asset.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :product_address %>
+    <%= form.text_field :product_address, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :details %>
+    <%= form.text_field :details, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+<!--  <div class="my-5">-->
+    <%#= form.label :asset_type_id %>
+    <%#= form.text_field :asset_type_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<!--  </div>-->
+
+
+  <div class="mb-4">
+    <%= form.label :asset_type_id, class: 'block font-semibold' %>
+    <%= form.select :asset_type_id, AssetType.all.map { |asset| [asset.product_catagory, asset.id] }, {}, class: 'w-full p-2 border border-gray-300 rounded' %>
+  </div>
+
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

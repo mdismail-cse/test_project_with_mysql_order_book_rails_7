@@ -1,0 +1,12 @@
+<div id="<%= dom_id asset_type %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Product catagory:</strong>
+    <%= asset_type.product_catagory %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this asset type", asset_type, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this asset type', edit_asset_type_path(asset_type), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

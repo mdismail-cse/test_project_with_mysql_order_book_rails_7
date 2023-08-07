@@ -1,0 +1,28 @@
+<div id="<%= dom_id company_asset %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= company_asset.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Product address:</strong>
+    <%= company_asset.product_address %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Details:</strong>
+    <%= company_asset.details %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Asset type:</strong>
+    <% @catagory = AssetType.find(company_asset.asset_type_id) %>
+    <%= @catagory.product_catagory %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this company asset", company_asset, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this company asset', edit_company_asset_path(company_asset), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

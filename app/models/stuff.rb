@@ -6,6 +6,9 @@ class Stuff < ApplicationRecord
   has_one_attached :profile_image
   paginates_per 10
 
+  has_many :asset_stuffs
+  has_many :company_assets, through: :asset_stuffs
+
 
   validate :remove_bd_country_code_from_phone_number, on: :create
   validates :phone_number, uniqueness: true

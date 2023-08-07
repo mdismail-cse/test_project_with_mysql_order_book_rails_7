@@ -13,10 +13,24 @@
 
     <%= render @stuff %>
 
-    <%= link_to 'Edit this stuff', edit_stuff_path(@stuff), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit stuff password', edit_stuff_path(@stuff), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <% @test = 1 %>
+    <%= link_to 'Edit stuff information', edit_stuff_path(@stuff, @test), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+    <%= link_to 'Assing Asset', new_asset_stuff_url(@stuff), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+
+
     <div class="inline-block ml-2">
       <%= button_to 'Destroy this stuff', stuff_path(@stuff), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
     <%= link_to 'Back to stuffs', stuffs_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
+</div>
+
+
+<div>
+
+  <%= render 'assaign_assets' %>
+
 </div>

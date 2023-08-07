@@ -1,0 +1,35 @@
+<h1 class="text-2xl font-bold mb-4">Assets</h1>
+<% @assign = AssetStuff.where(stuff_id: @stuff.id, status: "assigned") %>
+
+<div class="overflow-x-auto">
+  <table class="table-auto w-full mt-5">
+    <thead>
+    <tr>
+      <th class="px-4 py-2">Company asset</th>
+      <th class="px-4 py-2">Product address</th>
+      <th class="px-4 py-2">Status</th>
+      <th class="px-4 py-2">Assign at</th>
+      <th class="px-4 py-2">Return at</th>
+      <th class="px-4 py-2">Action</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @assign.each do |assign| %>
+      <% @company_asset = CompanyAsset.find(assign.company_asset_id) %>
+      <tr>
+        <td class="px-4 py-2 border-b border-gray-300"><%= @company_asset.name %></td>
+        <td class="px-4 py-2 border-b border-gray-300"><%= @company_asset.product_address %></td>
+        <td class="px-4 py-2 border-b border-gray-300"><%= assign.status %></td>
+        <td class="px-4 py-2 border-b border-gray-300"><%= assign.assign_at %></td>
+        <td class="px-4 py-2 border-b border-gray-300"><%= assign.return_at %></td>
+<!--        <td class="px-4 py-2 border-b border-gray-300"><%#= link_to 'Update Status', update_status_path(stuff_id: @stuff.id, status: 'unassigned', return_at: DateTime.now), method: :patch %>-->
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+
