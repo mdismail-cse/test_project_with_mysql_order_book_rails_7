@@ -10,7 +10,7 @@ class StuffsController < ApplicationController
       if params[:file].content_type == "text/csv"
         csv_data = params[:file].read
         parsed_data = CSV.parse(csv_data, headers: true, col_sep: ",", header_converters: :symbol)
-        
+
         parsed_data.each do |row|
 
           stuff_hash = {}
@@ -24,12 +24,12 @@ class StuffsController < ApplicationController
           s.email = stuff_hash[:email]
           s.password = stuff_hash[:password]
           s.role_id = stuff_hash[:role_id]
-          
+
 
           s.save
 
         end
-        
+
 
 
 
@@ -54,6 +54,18 @@ class StuffsController < ApplicationController
   # GET /stuffs/1 or /stuffs/1.json
   def show
     @profile = current_stuff
+
+    @stuff = Stuff.find(params[:id])
+
+    if params[:filter] == 'unassigned'
+      @assign = AssetStuff.where(stuff_id: @stuff.id, status: 'unassigned')
+    elsif params[:filter] == 'all'
+      @assign = AssetStuff.where(stuff_id: @stuff.id)
+    else
+      @assign = AssetStuff.where(stuff_id: @stuff.id, status: 'assigned')
+    end
+
+
   end
 
   # GET /stuffs/new
@@ -63,7 +75,7 @@ class StuffsController < ApplicationController
 
   # GET /stuffs/1/edit
   def edit
-    
+
   end
 
   # POST /stuffs or /stuffs.json

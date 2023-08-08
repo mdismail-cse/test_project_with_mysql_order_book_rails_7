@@ -22,10 +22,20 @@
 
 
     <div class="inline-block ml-2">
-      <%= button_to 'Destroy this stuff', stuff_path(@stuff), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      <%= button_to 'Destroy this stuff', stuff_path(@stuff), method: :delete, params: { asset_stuff: { status: 'returned' } }, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
     <%= link_to 'Back to stuffs', stuffs_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
+</div>
+
+<br>
+
+<div class="mb-4">
+  <%= form_tag(url_for(controller: :stuffs, action: :show, id: @stuff.id), method: :get, class: "mb-4") do %>
+    <%= label_tag :filter, "Filter by:" %>
+    <%= select_tag :filter, options_for_select([['Assigned', 'assigned'], ['Unassigned', 'unassigned'], ['All', 'all']], params[:filter]), include_blank: true %>
+    <%= submit_tag "Apply Filter", class: "px-4 py-2 bg-gray-100 rounded-lg font-medium" %>
+  <% end %>
 </div>
 
 

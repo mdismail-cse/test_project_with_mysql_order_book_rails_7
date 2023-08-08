@@ -14,10 +14,16 @@
     <%= company_asset.details %>
   </p>
 
+
+
   <p class="my-5">
     <strong class="block font-medium mb-1">Asset type:</strong>
     <% @catagory = AssetType.find(company_asset.asset_type_id) %>
     <%= @catagory.product_catagory %>
+  </p>
+
+  <p class="my-5">
+   <strong> <%= link_to 'View Asset History', company_asset_path(company_asset, view: 'additional_info', history: company_asset.id) %></strong>
   </p>
 
   <% if action_name != "show" %>

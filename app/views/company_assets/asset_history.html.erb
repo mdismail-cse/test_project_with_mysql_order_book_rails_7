@@ -8,6 +8,7 @@
       <th class="px-4 py-2">Company asset</th>
       <th class="px-4 py-2">Product address</th>
       <th class="px-4 py-2">Status</th>
+      <th class="px-4 py-2">Staff Id</th>
       <th class="px-4 py-2">Assign at</th>
       <th class="px-4 py-2">Return at</th>
       <th class="px-4 py-2">Action</th>
@@ -16,13 +17,14 @@
     </thead>
 
     <tbody>
-    <% @assign.each do |assign| %>
+    <% @asset_history.each do |assign| %>
       <% @company_asset = CompanyAsset.find(assign.company_asset_id) %>
       <% @update_assaign = AssetStuff.find(assign.id) %>
       <tr>
         <td class="px-4 py-2 border-b border-gray-300"><%= @company_asset.name %></td>
         <td class="px-4 py-2 border-b border-gray-300"><%= @company_asset.product_address %></td>
         <td class="px-4 py-2 border-b border-gray-300"><%= assign.status %></td>
+        <td class="px-4 py-2 border-b border-gray-300"><%= assign.stuff_id %></td>
         <td class="px-4 py-2 border-b border-gray-300"><%= assign.assign_at %></td>
         <td class="px-4 py-2 border-b border-gray-300"><%= assign.return_at %></td>
 
@@ -34,5 +36,3 @@
     </tbody>
   </table>
 </div>
-
-

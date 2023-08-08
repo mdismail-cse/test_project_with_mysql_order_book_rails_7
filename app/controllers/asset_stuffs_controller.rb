@@ -8,6 +8,7 @@ class AssetStuffsController < ApplicationController
 
   # GET /asset_stuffs/1 or /asset_stuffs/1.json
   def show
+
   end
 
   # GET /asset_stuffs/new
@@ -28,19 +29,19 @@ class AssetStuffsController < ApplicationController
     @asset_stuff = AssetStuff.new(asset_stuff_params)
     check_id = asset_stuff_params[:company_asset_id]
     if CompanyAsset.exists?(id: check_id)
-    respond_to do |format|
-      if @asset_stuff.save
-        format.html { redirect_to stuffs_url, notice: "Asset stuff was successfully created." }
-        # format.json { render :show, status: :created, location: @asset_stuff }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @asset_stuff.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @asset_stuff.save
+          format.html { redirect_to stuffs_url, notice: "Asset stuff was successfully created." }
+          # format.json { render :show, status: :created, location: @asset_stuff }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @asset_stuff.errors, status: :unprocessable_entity }
+        end
       end
-    end
     else
       @asset_stuff.errors.add(:company_asset_id, "Company Asset with ID #{check_id} does not exist.")
       respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity }
+          format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @asset_stuff.errors, status: :unprocessable_entity }
         @stuff= Stuff.find(asset_stuff_params[:stuff_id])
         end
@@ -52,19 +53,27 @@ class AssetStuffsController < ApplicationController
 
   # PATCH/PUT /asset_stuffs/1 or /asset_stuffs/1.json
   def update
-    respond_to do |format|
-      if @asset_stuff.update(asset_stuff_params)
-        format.html { redirect_to asset_stuff_url(@asset_stuff), notice: "Asset stuff was successfully updated." }
-        format.json { render :show, status: :ok, location: @asset_stuff }
+
+    @asset_stuff = AssetStuff.find(params[:id])
+    @stuff = Stuff.find(@asset_stuff.stuff_id)
+    if @asset_stuff.return_at.present?
+      redirect_to stuff_path(@stuff), notice: 'Already returnd the Asset'
+    else
+
+    # Update the attributes and save
+      if @asset_stuff.update(status: 'unassigned', return_at: Time.now)
+        # Successfully updated
+        redirect_to stuff_path(@stuff), notice: 'Record updated successfully.'
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @asset_stuff.errors, status: :unprocessable_entity }
+        # Update failed
+        render :edit
       end
     end
   end
 
   # DELETE /asset_stuffs/1 or /asset_stuffs/1.json
   def destroy
+    debugger
     @asset_stuff.destroy
 
     respond_to do |format|
@@ -75,12 +84,12 @@ class AssetStuffsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_asset_stuff
-      @asset_stuff = AssetStuff.find(params[:id])
-    end
+  def set_asset_stuff
+    @asset_stuff = AssetStuff.find(params[:id])
+  end
 
     # Only allow a list of trusted parameters through.
-    def asset_stuff_params
-      params.require(:asset_stuff).permit(:status, :assign_at, :return_at, :company_asset_id, :stuff_id)
-    end
+  def asset_stuff_params
+    params.require(:asset_stuff).permit!
+  end
 end

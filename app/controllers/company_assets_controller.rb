@@ -8,6 +8,15 @@ class CompanyAssetsController < ApplicationController
 
   # GET /company_assets/1 or /company_assets/1.json
   def show
+
+    # debugger
+    if params[:view] == 'additional_info'
+      @asset_history = AssetStuff.where(company_asset_id: params[:id])
+      # debugger
+      render 'asset_history'
+    else
+      @company_asset = CompanyAsset.find(params[:id])
+    end
   end
 
   # GET /company_assets/new
