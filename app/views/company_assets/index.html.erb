@@ -1,14 +1,20 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+<div class="ml-20">
+  <h1 class="text-2xl font-bold mb-4">Departments</h1>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Company assets</h1>
-    <%= link_to 'New company asset', new_company_asset_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
+  <table class="w-full border-collapse border border-gray-300">
+    <thead>
+    <tr>
+      <th class="px-4 py-2 border-b border-gray-300">Name</th>
+      <th class="px-4 py-2 border-b border-gray-300">Product Address</th>
+      <th class="px-4 py-2 border-b border-gray-300">Details</th>
+      <th class="px-4 py-2 border-b border-gray-300">Asset type</th>
+      <th class="px-4 py-2 border-b border-gray-300">History</th>
+      <th class="px-4 py-2 border-b border-gray-300">Action</th>
 
-  <div id="company_assets" class="min-w-full">
+    </tr>
+    </thead>
+    <tbody>
     <%= render @company_assets %>
-  </div>
+    </tbody>
+  </table>
 </div>

@@ -11,7 +11,7 @@ class CompanyAssetsController < ApplicationController
 
     # debugger
     if params[:view] == 'additional_info'
-      @asset_history = AssetStuff.where(company_asset_id: params[:id])
+      @asset_history = AssetStuff.where(company_asset_id: params[:id], status: "unassigned")
       # debugger
       render 'asset_history'
     else

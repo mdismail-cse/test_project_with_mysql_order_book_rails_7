@@ -3,6 +3,7 @@ class AssetTypesController < ApplicationController
 
   # GET /asset_types or /asset_types.json
   def index
+
     @asset_types = AssetType.all
   end
 

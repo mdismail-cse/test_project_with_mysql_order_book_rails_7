@@ -1,4 +1,50 @@
-<h1 class="text-2xl font-bold mb-4">Assets</h1>
+
+<%# debugger %>
+<div class = "ml-20 overflow-x-auto"><br>
+  <% @company_asset = CompanyAsset.find(params[:history]) %>
+  <strong>Company Asset</strong><br><br>
+  <p><strong>Name            : </strong><%= @company_asset.name %></p><br>
+  <p><strong>Product Address : </strong><%= @company_asset.product_address %></p><br>
+  <p><strong>Details         : </strong><%= @company_asset.details %></p><br>
+
+
+</div>
+
+<br>
+<br>
+<br>
+
+<div class ="ml-20">
+
+  <strong>Currently Assign</strong><br>
+  <br>
+  <% @asset_history_assign =AssetStuff.where(company_asset_id: params[:id], status: 'assigned').last%>
+  <%if @asset_history_assign && @asset_history_assign.stuff && @asset_history_assign.stuff.name.present? %>
+    <%= link_to stuff_path(@asset_history_assign.stuff) do %>
+      <p><strong>User : </strong> <%= @asset_history_assign.stuff.name %> </p><br>
+    <% end %>
+  <%else %>
+
+    <%= link_to stuff_path(@asset_history_assign.stuff)do %>
+      <p>No name the asset is avilable to assign</p><br>
+    <% end %>
+  <%end %>
+
+  <%if @asset_history_assign && @asset_history_assign.assign_at.present? %>
+    <p><strong>Assign Date: </strong>  <%= @asset_history_assign.assign_at %> </p>
+  <%else %>
+  <p>There is no entry</p>
+  <% end %>
+
+  <br>
+  <br>
+</div>
+
+
+
+<div class="ml-20">
+
+<h1 class="text-2xl font-bold mb-4">OLD History</h1>
 <%# @assign = AssetStuff.where(stuff_id: @stuff.id, status: "assigned") %>
 
 <div class="overflow-x-auto">
@@ -8,7 +54,7 @@
       <th class="px-4 py-2">Company asset</th>
       <th class="px-4 py-2">Product address</th>
       <th class="px-4 py-2">Status</th>
-      <th class="px-4 py-2">Staff Id</th>
+      <th class="px-4 py-2">Staff name</th>
       <th class="px-4 py-2">Assign at</th>
       <th class="px-4 py-2">Return at</th>
       <th class="px-4 py-2">Action</th>
@@ -20,11 +66,16 @@
     <% @asset_history.each do |assign| %>
       <% @company_asset = CompanyAsset.find(assign.company_asset_id) %>
       <% @update_assaign = AssetStuff.find(assign.id) %>
+
       <tr>
-        <td class="px-4 py-2 border-b border-gray-300"><%= @company_asset.name %></td>
-        <td class="px-4 py-2 border-b border-gray-300"><%= @company_asset.product_address %></td>
+        <td class="px-4 py-2 border-b border-gray-300"><%= assign.company_asset.name %></td>
+        <td class="px-4 py-2 border-b border-gray-300"><%= assign.company_asset.product_address %></td>
         <td class="px-4 py-2 border-b border-gray-300"><%= assign.status %></td>
-        <td class="px-4 py-2 border-b border-gray-300"><%= assign.stuff_id %></td>
+        <td class="px-4 py-2 border-b border-gray-300">
+        <%= link_to stuff_url(assign.stuff) do %>
+            <%= assign.stuff.name %>
+        <%end %>
+        </td>
         <td class="px-4 py-2 border-b border-gray-300"><%= assign.assign_at %></td>
         <td class="px-4 py-2 border-b border-gray-300"><%= assign.return_at %></td>
 
@@ -35,4 +86,5 @@
     <% end %>
     </tbody>
   </table>
+</div>
 </div>

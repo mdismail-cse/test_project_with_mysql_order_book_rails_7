@@ -26,6 +26,7 @@ class AssetStuffsController < ApplicationController
   def create
     # debugger
 
+
     @asset_stuff = AssetStuff.new(asset_stuff_params)
     check_id = asset_stuff_params[:company_asset_id]
     if CompanyAsset.exists?(id: check_id)
@@ -36,6 +37,7 @@ class AssetStuffsController < ApplicationController
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @asset_stuff.errors, status: :unprocessable_entity }
+          @stuff= Stuff.find(asset_stuff_params[:stuff_id])
         end
       end
     else
