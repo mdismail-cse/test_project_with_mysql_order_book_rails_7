@@ -3,8 +3,8 @@ class AssetStuff < ApplicationRecord
   belongs_to :stuff
 
   validates :assign_at, presence: true
-  validate :validate_asset_presence, on: :create
-  validates_uniqueness_of :company_asset_id, conditions: -> { where(status: "assign") }
+  # validate :validate_asset_presence, on: :create
+  validates_uniqueness_of :company_asset_id, conditions: -> { where(status: 'assigned') }
 
   enum status: { unassigned: 0, assigned: 1 }
   # Other model attributes and associations...
@@ -24,14 +24,14 @@ class AssetStuff < ApplicationRecord
     self.status ||= :assigned
   end
 
-  def validate_asset_presence
-
-    if AssetStuff.where(company_asset_id: company_asset_id, status: 'assigned').exists?
-      errors.add(:Asset ,"Already assign")
-
-    end
-  end
-
-
+  # def validate_asset_presence
+  #
+  #   if AssetStuff.where(company_asset_id: company_asset_id, status: 'assigned').exists?
+  #     errors.add(:Asset ,"Already assign")
+  #
+  #   end
+  # end
+  #
+  #
 
 end

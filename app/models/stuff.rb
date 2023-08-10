@@ -11,8 +11,8 @@ class Stuff < ApplicationRecord
 
 
   validate :remove_bd_country_code_from_phone_number, on: :create
-  validates :phone_number, uniqueness: true
-  validates :email, :phone_number, :position, :name, presence: true
+  validates :phone_number, uniqueness: true , allow_nil: true
+  validates :email, :phone_number, :position, :name, presence: true, allow_nil: true
 
 
 

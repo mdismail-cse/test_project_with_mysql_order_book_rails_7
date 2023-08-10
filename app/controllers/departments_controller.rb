@@ -5,14 +5,20 @@ class DepartmentsController < ApplicationController
     # @departments = Department.all
     if params[:search].present?
       @departments = Department.where("title LIKE :search OR description LIKE :search", search: "%#{params[:search]}%")
-
+      @departments = @departments.where(delete_at: nil)
     else
-      @departments = Department.all
+      @departments = Department.where(delete_at: nil)
     end
   end
 
   def show
+    department = Department.find(params[:id])
+    if department.delete_at.nil?
     @department = Department.find(params[:id])
+    else
+      redirect_to departments_url
+
+    end
 
   end
 
@@ -46,8 +52,9 @@ class DepartmentsController < ApplicationController
   end
 
   def destroy
-    @department.destroy
+
     @department = Department.find(params[:id])
+    @department.update_column(:delete_at ,DateTime.now)
 
     redirect_to departments_url, notice: 'Department was successfully destroyed.'
   end

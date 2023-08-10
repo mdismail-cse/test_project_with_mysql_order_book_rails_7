@@ -4,11 +4,19 @@ class AssetTypesController < ApplicationController
   # GET /asset_types or /asset_types.json
   def index
 
-    @asset_types = AssetType.all
+    @asset_types = AssetType.where(delete_at: nil)
   end
 
   # GET /asset_types/1 or /asset_types/1.json
   def show
+    asset_type = AssetType.find(params[:id])
+
+    if asset_type.delete_at.nil?
+      @asset_type = AssetType.find(params[:id])
+
+    else
+      redirect_to asset_type_url
+    end
   end
 
   # GET /asset_types/new
@@ -50,7 +58,8 @@ class AssetTypesController < ApplicationController
 
   # DELETE /asset_types/1 or /asset_types/1.json
   def destroy
-    @asset_type.destroy
+    @asset_type = AssetType.find(params[:id])
+    @asset_type.update_columns(delete_at: DateTime.now)
 
     respond_to do |format|
       format.html { redirect_to asset_types_url, notice: "Asset type was successfully destroyed." }

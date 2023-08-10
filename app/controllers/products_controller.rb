@@ -6,12 +6,20 @@ class ProductsController < ApplicationController
     products = Product.all
     products = products.where(title: params[:title]) if params[:title].present?
     @products = products.page(params[:page]).per(10)
+    @products = @products.where(delete_at: nil)
 
     @profile = current_stuff
   end
 
   # GET /products/1 or /products/1.json
   def show
+
+    product = Product.find(params[:id])
+    if product.delete_at.nil?
+      @product = Product.find(params[:id])
+    else
+      redirect_to product_url
+    end
   end
 
   # GET /products/new
@@ -53,7 +61,8 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1 or /products/1.json
   def destroy
-    @product.destroy
+    @product = Product.find(params[:id])
+    @product.update_columns(delete_at: DateTime.now)
 
     respond_to do |format|
       format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
@@ -64,7 +73,10 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
+      product = Product.find(params[:id])
+      if product.delete_at.nil?
       @product = Product.find(params[:id])
+      end
     end
 
     # Only allow a list of trusted parameters through.

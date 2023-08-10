@@ -5,14 +5,22 @@ class PositionsController < ApplicationController
     # @positions = Position.all
     if params[:search].present?
       @positions = Position.where("post_name LIKE :search OR  description LIKE :search", search: "%#{params[:search]}%")
+      @positions = @positions.where(delete_at: nil)
     else
-      @positions = Position.all
+      @positions = Position.where(delete_at: nil)
     end
 
   end
 
   def show
+
+    position = Position.find(params[:id])
+    if position.delete_at.nil?
     @position = Position.find(params[:id])
+
+    else
+      redirect_to positions_url
+    end
 
   end
 
@@ -46,9 +54,10 @@ class PositionsController < ApplicationController
   end
 
   def destroy
+    # debugger
     @position = Position.find(params[:id])
 
-    @position.destroy
+    @position.update_columns(delete_at: DateTime.now)
     redirect_to positions_url, notice: 'Position was successfully destroyed.'
   end
 

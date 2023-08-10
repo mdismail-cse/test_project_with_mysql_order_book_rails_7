@@ -44,7 +44,7 @@ class StuffsController < ApplicationController
 
   def index
     @q = Stuff.ransack(params[:q])
-    @stuffs = @q.result(distinct: true).page(params[:page]).per(10)
+    @stuffs = @q.result(distinct: true).where(delete_at: nil).page(params[:page]).per(10)
 
     if stuff_signed_in?
     @profile = current_stuff
@@ -122,7 +122,9 @@ class StuffsController < ApplicationController
 
   # DELETE /stuffs/1 or /stuffs/1.json
   def destroy
-    @stuff.destroy
+    @stuff = Stuff.find(params[:id])
+
+    @stuff.update_columns(delete_at: DateTime.now)
 
     respond_to do |format|
       format.html { redirect_to stuffs_url, notice: "Stuff was successfully destroyed." }
@@ -134,7 +136,12 @@ class StuffsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_stuff
+    stuff = Stuff.find(params[:id])
+    if stuff.delete_at.nil?
     @stuff = Stuff.find(params[:id])
+    else
+      redirect_to stuffs_url
+    end
   end
 
   # Only allow a list of trusted parameters through.

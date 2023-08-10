@@ -3,12 +3,13 @@ class CompanyAssetsController < ApplicationController
 
   # GET /company_assets or /company_assets.json
   def index
-    @company_assets = CompanyAsset.all
+    @company_assets = CompanyAsset.where(delete_at: nil)
   end
 
   # GET /company_assets/1 or /company_assets/1.json
   def show
-
+    company_asset = CompanyAsset.find(params[:id])
+    if company_asset.delete_at.nil?
     # debugger
     if params[:view] == 'additional_info'
       @asset_history = AssetStuff.where(company_asset_id: params[:id], status: "unassigned")
@@ -16,6 +17,10 @@ class CompanyAssetsController < ApplicationController
       render 'asset_history'
     else
       @company_asset = CompanyAsset.find(params[:id])
+    end
+
+    else
+      redirect_to company_asset_url
     end
   end
 
@@ -58,7 +63,8 @@ class CompanyAssetsController < ApplicationController
 
   # DELETE /company_assets/1 or /company_assets/1.json
   def destroy
-    @company_asset.destroy
+    @company_asset = CompanyAsset.find(params[:id])
+    @company_asset.update_columns(delete_at: DateTime.now)
 
     respond_to do |format|
       format.html { redirect_to company_assets_url, notice: "Company asset was successfully destroyed." }

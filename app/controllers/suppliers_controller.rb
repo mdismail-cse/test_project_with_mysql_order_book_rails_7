@@ -5,12 +5,19 @@ class SuppliersController < ApplicationController
   def index
     @q = Supplier.ransack(params[:q])
     @suppliers = @q.result(distinct: true).page(params[:page]).per(10)
+    @suppliers = @suppliers.where(delete_at: nil)
     @profile = current_stuff
 
   end
 
   # GET /suppliers/1 or /suppliers/1.json
   def show
+    supplier = Supplier.find(params[:id])
+    if supplier.delete_at.nil?
+      @supplier = Supplier.find(params[:id])
+    else
+      redirect_to supplier_url
+    end
   end
 
   # GET /suppliers/new
@@ -52,7 +59,8 @@ class SuppliersController < ApplicationController
 
   # DELETE /suppliers/1 or /suppliers/1.json
   def destroy
-    @supplier.destroy
+    @supplier = Supplier.find(params[:id])
+    @supplier.update_columns(delete_at: DateTime.now)
 
     respond_to do |format|
       format.html { redirect_to suppliers_url, notice: "Supplier was successfully destroyed." }

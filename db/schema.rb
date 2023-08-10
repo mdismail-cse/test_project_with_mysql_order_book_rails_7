@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_07_095802) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_10_092130) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_095802) do
     t.string "product_catagory"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "delete_at"
   end
 
   create_table "company_assets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -64,6 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_095802) do
     t.bigint "asset_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "delete_at"
     t.index ["asset_type_id"], name: "index_company_assets_on_asset_type_id"
   end
 
@@ -72,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_095802) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "delete_at"
   end
 
   create_table "line_items", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -94,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_095802) do
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "delete_at"
     t.index ["department_id"], name: "index_positions_on_department_id"
   end
 
@@ -112,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_095802) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "delete_at"
   end
 
   create_table "purchase_orders", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -142,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_095802) do
     t.string "blood_group"
     t.bigint "position_id"
     t.string "phone_number"
+    t.datetime "delete_at"
     t.index ["email"], name: "index_stuffs_on_email", unique: true
     t.index ["position_id"], name: "index_stuffs_on_position_id"
     t.index ["reset_password_token"], name: "index_stuffs_on_reset_password_token", unique: true
@@ -152,6 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_095802) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "delete_at"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
