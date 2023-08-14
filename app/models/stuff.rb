@@ -19,7 +19,9 @@ class Stuff < ApplicationRecord
   devise :database_authenticatable,
   :recoverable, :rememberable, :validatable
 
-
+  def active_for_authentication?
+    super && delete_at.nil?
+  end
 
 
 
